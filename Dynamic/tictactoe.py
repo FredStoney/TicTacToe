@@ -305,12 +305,13 @@ def main():
 
 
 def play():
-    print("playing...")
+    print("playing tic tac toe...")
     getPolicy()
     global policy
     policy=policy[0]
     loadstates()
     while True:
+        print("new game")
         playboard=Board()
         while True:
             count=0
@@ -319,6 +320,15 @@ def play():
             playboard.action(1,policy[index])
             print(playboard)
             if game_over(playboard):
+                r = reward(playboard)
+                print(r)
+                if(r < 0):
+                    print("you win")
+                if (r == 0):
+                    print("cats game")
+                if (r > 0 ):
+                    print ("you lose")
+                
                 break
             while True:
                 action= input("which index?")
@@ -335,6 +345,14 @@ def play():
                     break
             playboard.action(-1,int(action))
             if game_over(playboard):
+                r = reward(playboard)
+                print(r)
+                if(r < 0):
+                    print("you win")
+                if (r == 0):
+                    print("cats game")
+                if (r > 0 ):
+                    print ("you lose")
                 break
 
 import pickle
